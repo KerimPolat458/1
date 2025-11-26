@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+<Routes @rendermode="@RenderModeForPage"/>
+
+<script src="_framework/blazor.web.js"></script>
+
+</body>
+
+@code{
+
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+
+    private IComponentRenderMode? RenderModeForPage =>
+        HttpContext.Request.Path
+            .StartsWithSegments("/Account")
+            ? null
+            : InteractiveServer;
+
+}
+
+</html>
